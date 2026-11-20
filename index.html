@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Hugging Face returns 404 (no CORS headers) for model downloads when the
+         request carries a workers.dev Referer. Suppressing the Referer on all
+         outgoing fetches lets Transformers.js load the model successfully. -->
+    <meta name="referrer" content="no-referrer" />
     <title>DepthForge — From Photos to 3D</title>
     <meta property="og:image" content="https://bolt.new/static/og_default.png" />
     <meta name="twitter:card" content="summary_large_image" />
