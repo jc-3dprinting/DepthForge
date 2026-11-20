@@ -2,6 +2,12 @@ import { pipeline, env, type DepthEstimationPipeline } from '@huggingface/transf
 
 // Fetch model files from the Hugging Face Hub (no local model copies).
 env.allowLocalModels = false;
+// NOTE: The ONNX Runtime Web WASM binary is loaded from the jsdelivr CDN at
+// runtime via Transformers.js' default `wasmPaths` (see its src/backends/onnx.js).
+// We intentionally do NOT override `env.backends.onnx.wasm.wasmPaths` here, so
+// the library resolves the correct CDN paths/versions for both the WebGPU
+// (asyncify) and WASM backends. The Vite config strips the unused bundled
+// `.wasm` asset so the production bundle stays within deploy limits.
 
 export type Backend = 'webgpu' | 'wasm';
 
